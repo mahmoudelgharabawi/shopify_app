@@ -9,7 +9,7 @@ class ThemeUtils {
             fontWeight: FontWeight.w500),
         displayMedium: TextStyle(
             color: Colors.blue, fontSize: 18, fontWeight: FontWeight.w500)),
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
     useMaterial3: true,
   );
 }
