@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:shopify_app/pages/home_page.dart';
+import 'package:shopify_app/widgets/app_bar_ex.widget.dart';
 
 class MasterPage extends StatefulWidget {
   const MasterPage({
@@ -81,9 +82,7 @@ class _MasterPageState extends State<MasterPage> {
           );
         }),
       ),
-      appBar: AppBar(
-        title: Text('Let\'s Have Shopping..'),
-      ),
+      appBar: AppBarEx.getAppBar,
       body: Column(
         children: <Widget>[_pages[_selectedIndex]],
       ),
