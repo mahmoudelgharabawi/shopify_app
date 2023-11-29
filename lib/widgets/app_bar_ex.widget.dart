@@ -3,22 +3,22 @@ import 'package:shopify_app/utils/colors.util.dart';
 
 class AppBarEx {
   static PreferredSizeWidget get getAppBar => AppBar(
-        toolbarHeight: 70,
         actions: [
           Stack(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Transform.flip(
-                  flipX: true,
-                  child: Icon(
-                    Icons.chat_bubble_outline,
-                    color: ColorsUtil.iconColor,
+                  onPressed: () {},
+                  icon: Image.asset('assets/images/Messages.png')
+                  //  Transform.flip(
+                  //   flipX: true,
+                  //   child: Icon(
+                  //     Icons.chat_bubble_outline,
+                  //     color: ColorsUtil.iconColor,
+                  //   ),
+                  // ),
                   ),
-                ),
-              ),
               Positioned(
-                  bottom: 0,
+                  bottom: 6,
                   child: Badge(
                     backgroundColor: ColorsUtil.badgeColor,
                     label: Text('5'),
@@ -35,7 +35,7 @@ class AppBarEx {
                 ),
               ),
               Positioned(
-                  bottom: 0,
+                  bottom: 6,
                   child: Badge(
                     backgroundColor: ColorsUtil.badgeColor,
                     label: Text('5'),
