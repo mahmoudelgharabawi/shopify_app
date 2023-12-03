@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopify_app/pages/master_page.dart';
 import 'package:shopify_app/services/prefrences.service.dart';
 
@@ -113,8 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: () {
                         if ((formKey.currentState?.validate() ?? false)) {
-                          PrefrencesService.prefs
-                              ?.setString('user', emailController.text);
+                          GetIt.I<SharedPreferences>()
+                              .setString('user', emailController.text);
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (_) => MasterPage()));
                         }
