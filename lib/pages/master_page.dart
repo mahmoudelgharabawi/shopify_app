@@ -89,7 +89,7 @@ class _MasterPageState extends State<MasterPage> {
       ),
       appBar: AppBarEx.getAppBar,
       body: Column(
-        children: <Widget>[_pages[_selectedIndex]],
+        children: <Widget>[Expanded(child: _pages[_selectedIndex])],
       ),
     );
   }

@@ -28,5 +28,26 @@
         "title" : "Assets",
         "description" : "assets Category"
     }
+    ],
+    "ads" : [
+        {
+            "id" : "1",
+            "title" : "new discounts",
+            "picture" : "https://m.media-amazon.com/images/I/81S-ekaE+vS._AC_UL320_.jpg"
+        },
+        {
+            "id" : "2",
+            "title" : "Big sales",
+            "picture" : "https://m.media-amazon.com/images/I/61hMQOHmEIL._AC_UL320_.jpg"
+        },
+        {
+            "id" : "3",
+            "title" : "black friday offers",
+            "picture" : "https://m.media-amazon.com/images/I/81b9Eh286BL._AC_UL320_.jpg"
+        }
     ]
+    
+
+
 }
+

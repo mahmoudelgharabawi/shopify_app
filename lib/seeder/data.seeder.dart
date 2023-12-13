@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:shopify_app/models/ads.model.dart';
 import 'package:shopify_app/models/category.model.dart';
 import 'package:shopify_app/models/product.model.dart';
 
@@ -9,6 +10,7 @@ class DataSeeder {
 
   static List<Product> products = [];
   static List<CategoryData> categories = [];
+  static List<Ads> ads = [];
 
   static Future<void> loadData() async {
     await Future.delayed(const Duration(seconds: 5));
@@ -20,5 +22,6 @@ class DataSeeder {
     categories = (_data['categories'] as List)
         .map((e) => CategoryData.fromJson(e))
         .toList();
+    ads = (_data['ads'] as List).map((e) => Ads.fromJson(e)).toList();
   }
 }

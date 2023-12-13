@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   bool _isLoading = true;
 
   ValueNotifier<List<int>> listNotifier = ValueNotifier<List<int>>([]);
-
+  late PageController controller;
   void addValueToList() {
     listNotifier.value.add(Random().nextInt(100));
     listNotifier.notifyListeners();
@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    controller = PageController(initialPage: 1);
     getData();
     super.initState();
   }
@@ -44,28 +45,95 @@ class _HomePageState extends State<HomePage> {
     _isLoading = false;
   }
 
-  ValueNotifier<int> indexNotifier = ValueNotifier(0);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          HeadlineWidget(title: 'Categories'),
-          CategoriesRowHome(),
-          ValueListenableBuilder(
-              valueListenable: indexNotifier,
-              builder: (context, value, _) {
-                return CarouselSliderEx(imageUrls: [
-                  "https://m.media-amazon.com/images/I/81S-ekaE+vS._AC_UL320_.jpg",
-                  "https://m.media-amazon.com/images/I/61hMQOHmEIL._AC_UL320_.jpg",
-                  "https://m.media-amazon.com/images/I/81b9Eh286BL._AC_UL320_.jpg",
-                  "https://m.media-amazon.com/images/I/61U-R3-znNL._AC_UL320_.jpg"
-                ], onBtnPressed: () {});
-              }),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            HeadlineWidget(title: 'Categories'),
+            CategoriesRowHome(),
+            // CarouselSlider.builder(
+            //   itemBuilder: (ctx, index, _) {
+            //     return Container(
+            //         width: 500,
+            //         margin: EdgeInsets.symmetric(horizontal: 5.0),
+            //         decoration: BoxDecoration(color: Colors.amber),
+            //         child: Image.network(DataSeeder.ads[index].picture!));
+            //   },
+            //   itemCount: DataSeeder.ads.length,
+
+            //   options: CarouselOptions(height: 200.0),
+            //   // items: DataSeeder.ads.map((ad) {
+            //   //   return Container(
+            //   //       width: 500,
+            //   //       margin: EdgeInsets.symmetric(horizontal: 5.0),
+            //   //       decoration: BoxDecoration(color: Colors.amber),
+            //   //       child: Image.network(ad.picture!));
+            //   // }).toList(),
+            // ),
+
+            SizedBox(
+              width: 200,
+              height: 500,
+              child: PageView(
+                scrollDirection: Axis.vertical,
+                // physics: const NeverScrollableScrollPhysics(),
+                controller: controller,
+                children: [
+                  Container(
+                    height: 20,
+                    width: 20,
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Text('First Page'),
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 20,
+                    color: Colors.green,
+                    child: const Center(
+                      child: Text('Second Page'),
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                    width: 20,
+                    color: Colors.yellow,
+                    child: const Center(
+                      child: Text('Third Page'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            ElevatedButton(
+                onPressed: () {
+                  controller.animateToPage(2,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const Text('Move To Next Page')),
+            ElevatedButton(
+                onPressed: () {
+                  controller.animateToPage(2,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const Text('Move To Next Page')),
+            ElevatedButton(
+                onPressed: () {
+                  controller.animateToPage(2,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn);
+                },
+                child: const Text('Move To Next Page')),
+          ],
+        ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:shopify_app/utils/colors.util.dart';
 
 class AppBarEx {
   static PreferredSizeWidget get getAppBar => AppBar(
+        surfaceTintColor: Colors.white,
         actions: [
           Stack(
             children: [
