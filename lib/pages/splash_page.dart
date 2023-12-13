@@ -1,9 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shopify_app/pages/master_page.dart';
+import 'package:shopify_app/pages/home_page.dart';
 import 'package:shopify_app/pages/login_page.dart';
-import 'package:shopify_app/services/prefrences.service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,17 +18,15 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void checkUser() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    var result = GetIt.I<SharedPreferences>().get('user');
-    if (context.mounted) {
-      if (result != null) {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => MasterPage()));
+            context, MaterialPageRoute(builder: (_) => const LoginPage()));
       } else {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => LoginPage()));
+            context, MaterialPageRoute(builder: (_) => const HomePage()));
       }
-    }
+    });
   }
 
   @override
