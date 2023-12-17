@@ -5,8 +5,8 @@ class Ads {
 
   Ads();
 
-  Ads.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  Ads.fromJson(Map<String, dynamic> json, String docId) {
+    id = docId;
     title = json['title'];
     picture = json['picture'];
   }

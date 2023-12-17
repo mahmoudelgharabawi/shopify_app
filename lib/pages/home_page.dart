@@ -1,10 +1,6 @@
-import 'dart:math';
-
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:shopify_app/seeder/data.seeder.dart';
-import 'package:shopify_app/widgets/carousel_slider_ex.dart';
+import 'package:provider/provider.dart';
+import 'package:shopify_app/providers/app_auth.provider.dart';
 import 'package:shopify_app/widgets/headline.widget.dart';
 import 'package:shopify_app/widgets/home/categories_row.home.widget.dart';
 
@@ -16,35 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isLoading = true;
-
-  ValueNotifier<List<int>> listNotifier = ValueNotifier<List<int>>([]);
-  late PageController controller;
-  void addValueToList() {
-    listNotifier.value.add(Random().nextInt(100));
-    listNotifier.notifyListeners();
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    listNotifier.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    controller = PageController(initialPage: 1);
-    getData();
-    super.initState();
-  }
-
-  void getData() async {
-    await DataSeeder.loadData();
-    setState(() {});
-    _isLoading = false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,6 +22,11 @@ class _HomePageState extends State<HomePage> {
           children: [
             HeadlineWidget(title: 'Categories'),
             CategoriesRowHome(),
+            ElevatedButton(
+                onPressed: () =>
+                    Provider.of<AppAuthProvider>(context, listen: false)
+                        .onLogout(context),
+                child: Text('LogOut'))
             // CarouselSlider.builder(
             //   itemBuilder: (ctx, index, _) {
             //     return Container(
@@ -74,64 +46,6 @@ class _HomePageState extends State<HomePage> {
             //   //       child: Image.network(ad.picture!));
             //   // }).toList(),
             // ),
-
-            SizedBox(
-              width: 200,
-              height: 500,
-              child: PageView(
-                scrollDirection: Axis.vertical,
-                // physics: const NeverScrollableScrollPhysics(),
-                controller: controller,
-                children: [
-                  Container(
-                    height: 20,
-                    width: 20,
-                    color: Colors.blue,
-                    child: const Center(
-                      child: Text('First Page'),
-                    ),
-                  ),
-                  Container(
-                    height: 20,
-                    width: 20,
-                    color: Colors.green,
-                    child: const Center(
-                      child: Text('Second Page'),
-                    ),
-                  ),
-                  Container(
-                    height: 20,
-                    width: 20,
-                    color: Colors.yellow,
-                    child: const Center(
-                      child: Text('Third Page'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            ElevatedButton(
-                onPressed: () {
-                  controller.animateToPage(2,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.fastOutSlowIn);
-                },
-                child: const Text('Move To Next Page')),
-            ElevatedButton(
-                onPressed: () {
-                  controller.animateToPage(2,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.fastOutSlowIn);
-                },
-                child: const Text('Move To Next Page')),
-            ElevatedButton(
-                onPressed: () {
-                  controller.animateToPage(2,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.fastOutSlowIn);
-                },
-                child: const Text('Move To Next Page')),
           ],
         ),
       ),

@@ -3,24 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopify_app/providers/app_auth.provider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     Provider.of<AppAuthProvider>(context, listen: false).init();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    Provider.of<AppAuthProvider>(context, listen: false).dispose();
-    super.dispose();
   }
 
   @override
@@ -43,6 +37,10 @@ class _LoginPageState extends State<LoginPage> {
                           width: 100,
                           color: Colors.red,
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text('SignUp'),
                         const SizedBox(
                           height: 20,
                         ),
@@ -110,12 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            await appAuthProvider.login(context);
+                            await appAuthProvider.signUp(context);
                           },
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 60),
                           ),
-                          child: const Text('Login'),
+                          child: const Text('Signup'),
                         )
                       ],
                     ),

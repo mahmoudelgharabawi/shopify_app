@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_app/pages/home_page.dart';
-import 'package:shopify_app/pages/login_page.dart';
+import 'package:shopify_app/pages/auth/login_page.dart';
+import 'package:shopify_app/pages/master_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,6 +14,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  StreamSubscription<User?>? _listener;
   @override
   void initState() {
     checkUser();
@@ -18,21 +22,28 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void checkUser() async {
-    FirebaseAuth.instance.authStateChanges().listen((user) {
+    await Future.delayed(const Duration(seconds: 2));
+    _listener = FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const LoginPage()));
       } else {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const HomePage()));
+            context, MaterialPageRoute(builder: (_) => const MasterPage()));
       }
     });
   }
 
   @override
+  void dispose() {
+    _listener?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [CircularProgressIndicator()],

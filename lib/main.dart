@@ -1,9 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopify_app/firebase_options.dart';
+import 'package:shopify_app/pages/home_page.dart';
 import 'package:shopify_app/pages/splash_page.dart';
+import 'package:shopify_app/providers/app_auth.provider.dart';
+import 'package:shopify_app/providers/home.provider.dart';
 import 'package:shopify_app/utils/theme.utils.dart';
 
 void main() async {
@@ -26,7 +30,10 @@ void main() async {
 
   // await PrefrencesService.init();
 
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => AppAuthProvider()),
+    ChangeNotifierProvider(create: (_) => HomeProvider())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

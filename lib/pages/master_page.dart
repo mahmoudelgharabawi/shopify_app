@@ -1,13 +1,7 @@
-import 'dart:convert';
-
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:shopify_app/models/category.model.dart';
-import 'package:shopify_app/models/product.model.dart';
 import 'package:shopify_app/pages/home_page.dart';
-import 'package:shopify_app/seeder/data.seeder.dart';
 import 'package:shopify_app/widgets/app_bar_ex.widget.dart';
 
 class MasterPage extends StatefulWidget {
