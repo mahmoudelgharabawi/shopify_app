@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -8,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopify_app/pages/auth/login_page.dart';
 import 'package:shopify_app/pages/auth/signup.page.dart';
 import 'package:shopify_app/pages/master_page.dart';
-import 'package:shopify_app/pages/splash_page.dart';
 
 class AppAuthProvider extends ChangeNotifier {
   late GlobalKey<FormState> formKey;
