@@ -1,15 +1,14 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopify_app/pages/product_details.page.dart';
 import 'package:shopify_app/providers/app_auth.provider.dart';
 import 'package:shopify_app/providers/category.provider.dart';
 import 'package:shopify_app/providers/product.provider.dart';
 import 'package:shopify_app/widgets/headline.widget.dart';
 import 'package:shopify_app/widgets/home/categories_row.home.widget.dart';
-import 'package:shopify_app/widgets/home/category_item_row.home.widget.dart';
 import 'package:shopify_app/widgets/product.widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,7 +83,18 @@ class _HomePageState extends State<HomePage> {
                             axisCount: GridLayoutEnum.threeElementsInRow,
                             shrinkWrap: true,
                             children: snapshot.data
-                                    ?.map((e) => ProductWidget(product: e))
+                                    ?.map((e) => ProductWidget(
+                                          product: e,
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        ProductDetailsPage(
+                                                          product: e,
+                                                        )));
+                                          },
+                                        ))
                                     .toList() ??
                                 [],
                           );

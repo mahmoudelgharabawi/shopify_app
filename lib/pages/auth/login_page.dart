@@ -1,6 +1,5 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:shopify_app/providers/app_auth.provider.dart';
 
@@ -16,12 +15,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     Provider.of<AppAuthProvider>(context, listen: false).init();
     super.initState();
-  }
-
-  @override
-  void deactivate() {
-    Provider.of<AppAuthProvider>(context, listen: false).providerDispose();
-    super.deactivate();
   }
 
   @override
