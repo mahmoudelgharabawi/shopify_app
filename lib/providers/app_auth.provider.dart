@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopify_app/pages/auth/login_page.dart';
 import 'package:shopify_app/pages/auth/signup.page.dart';
 import 'package:shopify_app/pages/master_page.dart';
+import 'package:shopify_app/services/push_notification.service.dart';
 
 class AppAuthProvider extends ChangeNotifier {
   GlobalKey<FormState>? formKey;
@@ -144,6 +145,7 @@ class AppAuthProvider extends ChangeNotifier {
 
     await FirebaseAuth.instance.signOut();
     await GetIt.I.get<SharedPreferences>().clear();
+    PushNotificationService.onPushNotificationClosed();
     Navigator.pop(contextEx);
     Navigator.pushReplacement(
         contextEx, MaterialPageRoute(builder: (_) => const LoginPage()));

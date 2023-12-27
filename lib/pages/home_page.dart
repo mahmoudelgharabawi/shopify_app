@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
@@ -10,6 +12,8 @@ import 'package:shopify_app/providers/product.provider.dart';
 import 'package:shopify_app/widgets/headline.widget.dart';
 import 'package:shopify_app/widgets/home/categories_row.home.widget.dart';
 import 'package:shopify_app/widgets/product.widget.dart';
+
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -109,6 +113,30 @@ class _HomePageState extends State<HomePage> {
               },
             ),
 
+            ElevatedButton(
+                onPressed: () async {
+                  try {
+                    var result = await http.post(
+                        Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+                        body: jsonEncode({
+                          "userId": 15,
+                          "title":
+                              "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                          "body":
+                              "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+                        }));
+
+                    if (result.statusCode == 200 || result.statusCode == 201) {
+                      print('result : ${result.body.runtimeType}');
+                      print('result : ${result.body}');
+                    } else {
+                      print('error in get data : ${result.statusCode}');
+                    }
+                  } catch (e) {
+                    print('Exception: $e');
+                  }
+                },
+                child: Text('make http call')),
             ElevatedButton(
                 onPressed: () =>
                     Provider.of<AppAuthProvider>(context, listen: false)

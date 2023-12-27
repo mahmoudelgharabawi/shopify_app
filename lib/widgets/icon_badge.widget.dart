@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopify_app/pages/cart.page.dart';
 import 'package:shopify_app/providers/cart.provider.dart';
 
 class CartBadgeWidget extends StatelessWidget {
@@ -11,7 +12,10 @@ class CartBadgeWidget extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => CartPage()));
+          },
           icon: const Icon(
             Icons.shopping_cart,
             color: Color(0xff727c8e),

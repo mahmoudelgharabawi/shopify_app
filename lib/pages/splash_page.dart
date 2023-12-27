@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shopify_app/pages/home_page.dart';
 import 'package:shopify_app/pages/auth/login_page.dart';
 import 'package:shopify_app/pages/master_page.dart';
+import 'package:shopify_app/services/push_notification.service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -28,6 +29,8 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const LoginPage()));
       } else {
+        PushNotificationService.checkNotificationOnKilledApp();
+        PushNotificationService.init();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const MasterPage()));
       }

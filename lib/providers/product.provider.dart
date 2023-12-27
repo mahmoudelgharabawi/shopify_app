@@ -31,4 +31,23 @@ class ProductProvider {
       return null;
     }
   }
+
+  Future<Product?> getProductById({required String productId}) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>>? result;
+
+      result = await FirebaseFirestore.instance
+          .collection('products')
+          .doc(productId)
+          .get();
+
+      if (result.exists) {
+        return Product.fromJson(result.data() ?? {}, result.id);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
 }

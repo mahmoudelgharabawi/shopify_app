@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopify_app/providers/app_auth.provider.dart';
@@ -142,7 +143,22 @@ class _LoginPageState extends State<LoginPage> {
                               minimumSize: const Size(300, 60),
                             ),
                             child: const Text('Login'),
-                          )
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              try {
+                                await FirebaseAuth.instance
+                                    .sendPasswordResetEmail(
+                                        email: 'melgharabawi3@gmail.com');
+                              } catch (e) {
+                                print('>>>>${e}');
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(300, 60),
+                            ),
+                            child: const Text('send reset email'),
+                          ),
                         ],
                       ),
                     ),
